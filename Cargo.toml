@@ -1,0 +1,11 @@
+[package]
+name = "expr_parser"
+version = "0.1.0"
+authors = ["Anton Okolelov <okoanton@yandex.ru>"]
+edition = "2018"
+
+[dependencies]
+maplit = "1.0.1"
+
+[lib]
+name="expr_parser"
