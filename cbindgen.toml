@@ -1,0 +1,6 @@
+language = "C"
+no_includes = true
+style="tag"
+
+[parse]
+parse_deps = true
