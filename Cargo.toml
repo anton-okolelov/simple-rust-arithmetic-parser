@@ -6,6 +6,8 @@ edition = "2018"
 
 [dependencies]
 maplit = "1.0.1"
+libc = "*"
 
 [lib]
 name="expr_parser"
+crate-type = ["cdylib"]
