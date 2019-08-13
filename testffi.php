@@ -8,6 +8,9 @@ $expression = $cdef->parse_arithmetic("-6-(4+5)+(5+5)*(4-4)");
 
 printExpression($expression);
 
+$cdef->destroy($expression);
+
+
 class ExpressionKind {
     const Add = 0;
     const Subtract = 1;
@@ -39,6 +42,3 @@ function printExpression($expression) {
             break;
     }
 }
-
-
-

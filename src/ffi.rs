@@ -15,6 +15,29 @@ pub extern "C" fn parse_arithmetic(s: *const c_char) -> *mut ExpressionFfi {
     }
 }
 
+#[no_mangle]
+pub extern "C" fn destroy(expression: *mut ExpressionFfi) {
+    unsafe {
+        match (*expression).expression_type {
+            ExpressionType::Add
+            | ExpressionType::Subtract
+            | ExpressionType::Multiply
+            | ExpressionType::Divide => {
+                destroy((*expression).data.pair_operands.right);
+                destroy((*expression).data.pair_operands.left);
+                Box::from_raw(expression);
+            }
+            ExpressionType::UnaryMinus => {
+                destroy((*expression).data.single_operand);
+                Box::from_raw(expression);
+            }
+            ExpressionType::Value => {
+                Box::from_raw(expression);
+            }
+        };
+    }
+}
+
 impl Expression {
     fn convert_to_c(&self) -> *mut ExpressionFfi {
         let expression_data = match self {
@@ -63,7 +86,6 @@ impl Expression {
     }
 }
 
-
 #[repr(C)]
 pub struct ExpressionFfi {
     expression_type: ExpressionType,
@@ -93,4 +115,3 @@ pub struct PairOperands {
     left: *mut ExpressionFfi,
     right: *mut ExpressionFfi,
 }
-
