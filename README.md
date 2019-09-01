@@ -9,7 +9,8 @@ FFI: [testffi.php](testffi.php)
 ```bash
 # build
 docker-compose build
-docker-compose run php74 cargo build && cbindgen . -o target/testffi.h
+docker-compose run php74 cargo build 
+docker-compose run php74 cbindgen . -o target/testffi.h
 
 #run php
 docker-compose run php74 php testffi.php 
