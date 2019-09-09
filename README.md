@@ -1,6 +1,8 @@
 Ariphmetic parser in Rust
 =========================
 
+https://habr.com/ru/post/455614/ (in Russian)
+
 ```rust
 let expression = parse("100500*(2+35)-2*5").unwrap();
 ```
